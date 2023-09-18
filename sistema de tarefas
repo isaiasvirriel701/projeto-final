@@ -1,0 +1,43 @@
+var tarefas = [];
+
+ while (true) {
+   var escolha = prompt('Escolha uma opção:\n1. Adicionar tarefa\n2. Excluir tarefa\n3. Sair');
+ 
+   if (escolha === null) {
+     // O usuário clicou em Cancelar, então saímos do loop
+     break;
+   }
+ 
+   if (escolha === '1') {
+     var tarefa = prompt('Digite a tarefa:');
+     var detalhes = prompt('Digite os detalhes da tarefa:');
+ 
+     if (tarefa !== null && detalhes !== null) {
+       tarefas.push({ tarefa: tarefa, detalhes: detalhes });
+     }
+   } else if (escolha === '2') {
+     if (tarefas.length === 0) {
+       console.log('Não há tarefas para excluir.');
+     } else {
+       var indexExclusao = parseInt(prompt('Digite o número da tarefa que deseja excluir:'));
+       if (!isNaN(indexExclusao) && indexExclusao >= 1 && indexExclusao <= tarefas.length) {
+         var tarefaExcluida = tarefas.splice(indexExclusao - 1, 1);
+         console.log('Tarefa excluída: ' + tarefaExcluida[0].tarefa);
+       } else {
+         console.log('Número de tarefa inválido.');
+       }
+     }
+   } else if (escolha === '3') {
+     // O usuário escolheu sair
+     break;
+   } else {
+     console.log('Opção inválida.');
+   }
+ }
+ 
+ console.log('Tarefas:');
+ tarefas.forEach(function (tarefaObj, index) {
+   console.log('Tarefa ' + (index + 1) + ': ' + tarefaObj.tarefa);
+   console.log('Detalhes: ' + tarefaObj.detalhes);
+ });
+ 
